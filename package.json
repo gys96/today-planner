@@ -1,0 +1,12 @@
+{
+  "name": "today-planner",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Weather, meals, and outing recommendations with a minimal Node proxy.",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}

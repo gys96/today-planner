@@ -1,0 +1,16 @@
+services:
+  - type: web
+    name: today-planner
+    runtime: node
+    plan: free
+    autoDeploy: true
+    buildCommand: npm install
+    startCommand: npm start
+    healthCheckPath: /health
+    envVars:
+      - key: NODE_VERSION
+        value: 24
+      - key: PLACE_PROVIDERS
+        value: amap,overpass
+      - key: AMAP_API_KEY
+        sync: false

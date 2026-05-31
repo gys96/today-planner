@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>今天去哪儿</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700&family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="page-shell">
+    <header class="hero">
+      <div class="hero-copy">
+        <p class="eyebrow">LOCAL WEATHER · FOOD · FUN</p>
+        <h1>今天去哪儿</h1>
+        <p class="hero-text">
+          先看当地天气，再按气温、降水和出行方式，给你今天三餐建议和一条更像样的游玩路线。
+        </p>
+      </div>
+
+      <div class="control-panel">
+        <button class="primary-button" id="locateButton" type="button">使用当前位置</button>
+        <form class="search-form" id="searchForm">
+          <label class="sr-only" for="cityInput">输入城市名</label>
+          <input
+            id="cityInput"
+            name="city"
+            type="text"
+            placeholder="输入城市名，例如 Shanghai"
+            autocomplete="off"
+          >
+          <button class="secondary-button" type="submit">搜索城市</button>
+        </form>
+
+        <div class="planner-controls">
+          <label class="field">
+            <span>出游目的</span>
+            <select id="purposeSelect">
+              <option value="shopping">购物</option>
+              <option value="relax">放松</option>
+              <option value="nature">亲近自然</option>
+              <option value="culture">看展逛馆</option>
+              <option value="food">吃吃喝喝</option>
+            </select>
+          </label>
+
+          <label class="field">
+            <span>交通工具</span>
+            <select id="transportSelect">
+              <option value="walk">步行</option>
+              <option value="transit">地铁 / 公交</option>
+              <option value="bike">骑行</option>
+              <option value="drive">打车 / 自驾</option>
+            </select>
+          </label>
+        </div>
+
+        <p class="status" id="statusMessage">可以先搜索城市；如果浏览器允许，也可以直接使用当前位置。</p>
+        <p class="helper-text">提示：直接打开本地文件时，定位可能受浏览器限制；城市搜索和手动切换出游偏好仍然可用。</p>
+      </div>
+    </header>
+
+    <main class="dashboard">
+      <section class="card weather-card" aria-labelledby="weatherTitle">
+        <div class="card-heading">
+          <p class="card-label">Weather</p>
+          <h2 id="weatherTitle">当地天气</h2>
+        </div>
+
+        <div class="weather-summary">
+          <div>
+            <p class="location" id="locationName">未选择位置</p>
+            <p class="weather-description" id="weatherDescription">先定位或搜索城市。</p>
+          </div>
+          <div class="temperature-block">
+            <span class="temperature" id="temperatureValue">--°</span>
+            <span class="feels-like" id="feelsLikeValue">体感 --°</span>
+          </div>
+        </div>
+
+        <div class="weather-grid">
+          <article>
+            <span>最高 / 最低</span>
+            <strong id="rangeValue">-- / --</strong>
+          </article>
+          <article>
+            <span>降水概率</span>
+            <strong id="rainValue">--</strong>
+          </article>
+          <article>
+            <span>风速</span>
+            <strong id="windValue">--</strong>
+          </article>
+          <article>
+            <span>建议时段</span>
+            <strong id="timeSuggestion">--</strong>
+          </article>
+        </div>
+      </section>
+
+      <section class="card suggestion-card food-section" aria-labelledby="foodTitle">
+        <div class="card-heading">
+          <p class="card-label">Eat</p>
+          <h2 id="foodTitle">今天吃什么</h2>
+        </div>
+
+        <div class="recommendation" id="foodSummary">
+          <h3>等待天气数据</h3>
+          <p>拿到天气后，这里会生成早餐、午餐、晚餐以及不建议吃什么。</p>
+        </div>
+
+        <div class="meal-grid" id="mealGrid">
+          <article class="meal-card">
+            <p class="meal-tag">早餐</p>
+            <h3>等待生成</h3>
+            <p>先拿到天气，再决定今天早上适合吃得热一点、清爽一点还是更扎实一点。</p>
+          </article>
+          <article class="meal-card">
+            <p class="meal-tag">午餐</p>
+            <h3>等待生成</h3>
+            <p>这里会给出主食、菜和为什么这样搭配。</p>
+          </article>
+          <article class="meal-card">
+            <p class="meal-tag">晚餐</p>
+            <h3>等待生成</h3>
+            <p>晚餐会结合天气和今天出行节奏来推荐。</p>
+          </article>
+        </div>
+
+        <div class="avoid-card" id="avoidCard">
+          <p class="meal-tag">不建议吃什么</p>
+          <h3>等待生成</h3>
+          <p>天气出来后，这里会说明今天最好避开什么类型的食物，以及原因。</p>
+        </div>
+      </section>
+
+      <section class="card suggestion-card fun-section" aria-labelledby="funTitle">
+        <div class="card-heading">
+          <p class="card-label">Play</p>
+          <h2 id="funTitle">去哪里玩</h2>
+        </div>
+
+        <div class="recommendation" id="funRecommendation">
+          <h3>等待天气数据</h3>
+          <p>拿到天气和位置后，这里会生成具体出行方向、交通方式和一条路线。</p>
+        </div>
+
+        <div class="route-card">
+          <div class="route-meta">
+            <article>
+              <span>出游类型</span>
+              <strong id="routePurpose">--</strong>
+            </article>
+            <article>
+              <span>交通工具</span>
+              <strong id="routeTransport">--</strong>
+            </article>
+            <article>
+              <span>路线节奏</span>
+              <strong id="routePace">--</strong>
+            </article>
+          </div>
+          <div class="route-plan" id="routePlan">
+            <p>等待位置与天气数据。</p>
+          </div>
+        </div>
+
+        <div class="places-block">
+          <div class="places-header">
+            <h3>附近具体场所</h3>
+            <p id="placesHint">会根据定位和你的出游目的推荐附近地点。</p>
+          </div>
+          <ul class="place-list" id="placeList">
+            <li class="place-item empty">还没有可推荐的场所。</li>
+          </ul>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
